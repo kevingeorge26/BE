@@ -1,5 +1,10 @@
 package com.kevin.item;
 
+/**
+ * Class to hold item name and price
+ * @author kevin
+ *
+ */
 public class Item
 {
 	String name,price;

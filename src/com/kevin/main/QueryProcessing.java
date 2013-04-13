@@ -44,7 +44,7 @@ public class QueryProcessing
 			count = Integer.valueOf(properties.getProperty("item_per_page", "16"));
 		} 
 		catch (IOException e) {
-			System.out.println("Error in loading config file. Going to use default config");	
+			System.out.println("Cannot find config file. Going to use default config");	
 		}
 	}
 
@@ -82,7 +82,7 @@ public class QueryProcessing
 		String url = basicURL+"&" + countIC + "&" + searchItemQ;
 		List<Item> items = new Parse().getItemsOnPage(url);
 
-		System.out.println(items.size());
+		System.out.println("Number of items found " + items.size());
 		for(Item item : items)
 			System.out.println(item.toString());
 	}

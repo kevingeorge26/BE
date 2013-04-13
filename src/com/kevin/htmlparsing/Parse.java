@@ -30,33 +30,27 @@ public class Parse
 	 */
 	public int  getTotalResults(String query)
 	{
+		int count = -1;
 		try
 		{
 			Document doc = Jsoup.connect(query).get();
-			Elements searchResultDiv = doc.getElementsByClass("resultMsg");
-			
-			if(searchResultDiv.size() != 1)
+			Elements ele = doc.select("div.weFound.BodyXLBold span.BodyXLBoldOrg");
+			if(ele.isEmpty())
 			{
-				System.out.println("HTML structure was changed");
-				return 0;
-			}
+				System.out.println("HTML format for walmart has been changed");
 			
-			Elements result = searchResultDiv.get(0).getElementsByClass("BodyXLBoldOrg");
-			if(result.size() != 1)
+			}
+			else
 			{
-				System.out.println("HTML structure was changed1");
-				return 0;
-			}
-			
-			return Integer.valueOf(result.get(0).ownText().split("\\s+")[0]);
-			
+				count =  Integer.valueOf(ele.text().split("\\s+")[0]);
+			}			
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return count;
 	}
 	
 	/**
@@ -72,11 +66,11 @@ public class Parse
 		try 
 		{
 			Document doc = Jsoup.connect(query).get(); //Jsoup.parse(new File("test.html"), "UTF-8");//
-			Element mainDiv = doc.getElementById("shelfDiv");
+			Elements elements = doc.select("div#shelfDiv div.item");
 			
-			for(Element ele : mainDiv.select("div.item"))
+			for(Element ele : elements)
 			{
-				String name = ele.select("div.prodInfoBox").get(0).select("a.ListItemLink").get(0).select("a.ListItemLink").text();
+				String name = ele.select("div.prodInfoBox a.ListItemLink").text();
 				String price = ele.select(".camelPrice").text().split(" ")[0];
 				
 				result.add(new Item(name, price));
@@ -86,7 +80,8 @@ public class Parse
 		
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			e.printStackTrace();			
 		}
 		
 		
