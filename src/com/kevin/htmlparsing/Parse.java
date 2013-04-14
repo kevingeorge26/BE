@@ -37,7 +37,7 @@ public class Parse
 			Elements ele = doc.select("div.weFound.BodyXLBold span.BodyXLBoldOrg");
 			if(ele.isEmpty())
 			{
-				System.out.println("HTML format for walmart has been changed");
+				System.out.println("HTML format for walmart has changed");
 			
 			}
 			else
@@ -47,12 +47,12 @@ public class Parse
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();
+			
 		}
 		
 		return count;
 	}
-	
+		
 	/**
 	 * This function is used to handle query 2 of
 	 * the assignment
@@ -81,9 +81,8 @@ public class Parse
 		catch (IOException e) 
 		{
 			System.out.println(e.getMessage());
-			e.printStackTrace();			
-		}
-		
+						
+		}		
 		
 		return result;
 	}

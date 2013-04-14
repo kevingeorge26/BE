@@ -22,7 +22,7 @@ import com.kevin.item.Item;
  */
 public class QueryProcessing 
 {
-	private  String basicURL = "http://www.walmart.com/search/search-ng.do?Find=Find&search_constraint=0";
+	private  String basicURL = "http://www.walmart.com/search/search-ng.do?Find=Find&search_constraint=0&search_redirect=false";
 	int count = 16;
 
 
@@ -43,7 +43,7 @@ public class QueryProcessing
 			properties.load(new FileInputStream(new File("config.properties")));
 			count = Integer.valueOf(properties.getProperty("item_per_page", "16"));
 		} 
-		catch (IOException e) {
+		catch (Exception e) {
 			System.out.println("Cannot find config file. Going to use default config");	
 		}
 	}
